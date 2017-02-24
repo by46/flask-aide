@@ -1,0 +1,86 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">System Information</h3>
+                </div>
+                <div class="box-body box-profile">
+                    <ul class="list-group list-group-unbordered">
+                        {% for name, value in system_info %}
+                            <li class="list-group-item"><b>{{ name }}</b><a class="pull-right">{{ value }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Python Information</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="list-group list-group-unbordered">
+                        {% for name, value in python_info %}
+                            <li class="list-group-item"><b>{{ name }}</b><a class="pull-right">{{ value }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Application</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="list-group list-group-unbordered">
+                        {% for name, value in app_info %}
+                            <li class="list-group-item"><b>{{ name }}</b><a class="pull-right">{{ value }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+            {% if blueprints %}
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Blueprints</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Name</th>
+                                <th>Import Name</th>
+                                <th>Root Path</th>
+                                <th>Static Path</th>
+                            </tr>
+                            {% for name, bp in blueprints.iteritems() %}
+                                <tr>
+                                    <td>{{ name }}</td>
+                                    <td>{{ bp.import_name }}</td>
+                                    <td>{{ bp.root_path }}</td>
+                                    <td>{{ bp.static_folder }}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Configuration</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="list-group list-group-unbordered">
+                        {% for key in config|sort %}
+                            <li class="list-group-item"><b>{{ key }}</b><a class="pull-right">{{ config[key] }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
